@@ -1,0 +1,170 @@
+{
+  "columns": [
+    {
+      "name": "month",
+      "label": "Month",
+      "meaning": "The first day of the month in which the incidents happened, taken from the occurrence date. It is the time axis for every trend.",
+      "unit": "date",
+      "example": "2020-01-01",
+      "source": "calculated"
+    },
+    {
+      "name": "AREA NAME",
+      "label": "Area name",
+      "meaning": "The name of the area the incident is recorded under in the data file. It is used to compare places across the city.",
+      "unit": "",
+      "example": "77th Street",
+      "source": "data"
+    },
+    {
+      "name": "Crm Cd Desc",
+      "label": "Crime type",
+      "meaning": "The text description of the crime type recorded for the incident. Some descriptions are cut off in the source file.",
+      "unit": "",
+      "example": "ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT",
+      "source": "data"
+    },
+    {
+      "name": "incidents",
+      "label": "Incidents",
+      "meaning": "The number of reported incidents counted in that row. It is the main measure used in every chart.",
+      "unit": "incidents",
+      "example": "102",
+      "source": "calculated"
+    },
+    {
+      "name": "LAT",
+      "label": "Latitude",
+      "meaning": "The middle latitude of all incidents recorded in the area. It places the area on the map.",
+      "unit": "degrees",
+      "example": "33.9772",
+      "source": "calculated"
+    },
+    {
+      "name": "LON",
+      "label": "Longitude",
+      "meaning": "The middle longitude of all incidents recorded in the area. It places the area on the map.",
+      "unit": "degrees",
+      "example": "-118.294",
+      "source": "calculated"
+    },
+    {
+      "name": "total_incidents",
+      "label": "Total incidents",
+      "meaning": "All incidents counted for the area across every month analyzed. It shows the overall size of the area's caseload.",
+      "unit": "incidents",
+      "example": "61588",
+      "source": "calculated"
+    },
+    {
+      "name": "last_12_months",
+      "label": "Incidents in last 12 months",
+      "meaning": "Incidents counted in the most recent 12 full months. It is the current period in the comparison.",
+      "unit": "incidents",
+      "example": "7735",
+      "source": "calculated"
+    },
+    {
+      "name": "prior_12_months",
+      "label": "Incidents in prior 12 months",
+      "meaning": "Incidents counted in the 12 full months before the latest 12. It is the comparison period.",
+      "unit": "incidents",
+      "example": "14054",
+      "source": "calculated"
+    },
+    {
+      "name": "change_12m",
+      "label": "Change over 12 months",
+      "meaning": "Incidents in the last 12 months minus incidents in the 12 months before. A positive number means a rise.",
+      "unit": "incidents",
+      "example": "-6319",
+      "source": "calculated"
+    },
+    {
+      "name": "pct_change_12m",
+      "label": "Percent change over 12 months",
+      "meaning": "The 12-month change as a percent of the earlier 12 months. It is empty when the earlier period had no incidents.",
+      "unit": "percent",
+      "example": "-45.0",
+      "source": "calculated"
+    },
+    {
+      "name": "level",
+      "label": "Series level",
+      "meaning": "Says whether a row counts the whole city, one area or one crime type. It lets the dashboard filter the long table.",
+      "unit": "",
+      "example": "Area name",
+      "source": "calculated"
+    },
+    {
+      "name": "name",
+      "label": "Series name",
+      "meaning": "The name of the city, area or crime type that the row counts. It goes with the level column.",
+      "unit": "",
+      "example": "77th Street",
+      "source": "calculated"
+    },
+    {
+      "name": "previous_month",
+      "label": "Incidents in previous month",
+      "meaning": "The incident count of the same series in the month before. It is empty for the first month.",
+      "unit": "incidents",
+      "example": "1307.0",
+      "source": "calculated"
+    },
+    {
+      "name": "mom_change",
+      "label": "Change from previous month",
+      "meaning": "Incidents this month minus incidents last month. A positive number means a rise.",
+      "unit": "incidents",
+      "example": "-203.0",
+      "source": "calculated"
+    },
+    {
+      "name": "mom_pct_change",
+      "label": "Percent change from previous month",
+      "meaning": "The month-to-month change as a percent of last month's count. It is empty when last month had no incidents.",
+      "unit": "percent",
+      "example": "-15.53",
+      "source": "calculated"
+    },
+    {
+      "name": "baseline_mean",
+      "label": "Usual level",
+      "meaning": "The average monthly count over the 12 months before this one. It shows what is normal for that series.",
+      "unit": "incidents",
+      "example": "1112.75",
+      "source": "calculated"
+    },
+    {
+      "name": "baseline_std",
+      "label": "Usual variation",
+      "meaning": "How much the monthly count normally moves around the usual level, over the prior 12 months. A larger value means a noisier series.",
+      "unit": "incidents",
+      "example": "83.15",
+      "source": "calculated"
+    },
+    {
+      "name": "z_score",
+      "label": "Spike score",
+      "meaning": "How many standard deviations this month sits above its usual level. Higher values mean a more unusual month.",
+      "unit": "standard deviations",
+      "example": "-0.86",
+      "source": "calculated"
+    },
+    {
+      "name": "flag",
+      "label": "Spike flag",
+      "meaning": "Marks months that are far above the usual level by score, size and percent. Other months are marked as within the usual range.",
+      "unit": "",
+      "example": "Within usual range",
+      "source": "calculated"
+    }
+  ],
+  "codes": [],
+  "notes": [
+    "Area names and crime type descriptions come straight from the raw file. Their text was kept as stored.",
+    "A month is a calendar month based on the date the incident happened, not the date it was reported.",
+    "The area_crime_monthly table only has rows for months with at least one incident, and only for the most common crime types."
+  ]
+}

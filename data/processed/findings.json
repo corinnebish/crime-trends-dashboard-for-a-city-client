@@ -1,0 +1,87 @@
+{
+  "headline": "Reported incidents in Los Angeles fell 38.8% in the last 12 full months, and 77th Street changed the most among areas.",
+  "rows_analyzed": 1000197,
+  "date_range": "Jan 2020 to Nov 2024",
+  "metrics": [
+    {
+      "label": "Incidents analyzed",
+      "value": "1,000,197",
+      "explanation": "Reported incidents left after cleaning, across all months and areas."
+    },
+    {
+      "label": "Incidents in Nov 2024",
+      "value": "7,179",
+      "explanation": "Count in the latest full month. That is -8.2% compared with the month before."
+    },
+    {
+      "label": "Last 12 months vs the 12 before",
+      "value": "-38.8%",
+      "explanation": "The city logged 142,422 incidents in the last 12 full months and 232,829 in the 12 months before."
+    },
+    {
+      "label": "Unusual spikes flagged",
+      "value": "48",
+      "explanation": "Months where an area, crime type or the whole city ran well above its usual level of the prior 12 months."
+    },
+    {
+      "label": "Biggest area change",
+      "value": "77th Street (-6,319)",
+      "explanation": "The area whose 12-month count moved the most, in either direction, compared with the 12 months before."
+    }
+  ],
+  "findings": [
+    {
+      "statement": "Citywide incidents changed -38.8% over the last 12 full months compared with the 12 months before.",
+      "evidence": "142,422 incidents in the last 12 months against 232,829 in the 12 months before.",
+      "so_what": "Use this as the baseline for planning. Judge each area against the citywide direction, not in isolation."
+    },
+    {
+      "statement": "Foothill moved up the most and 77th Street moved down the most over the last 12 months.",
+      "evidence": "Foothill: -2,754 incidents (-38.2%). 77th Street: -6,319 incidents (-45.0%).",
+      "so_what": "Look first at Foothill when deciding where to add resources. Study what is working in 77th Street."
+    },
+    {
+      "statement": "TRESPASSING moved up the most and BATTERY - SIMPLE ASSAULT moved down the most among crime types.",
+      "evidence": "TRESPASSING: +1,927 (+46.7%). BATTERY - SIMPLE ASSAULT: -11,853 (-63.3%).",
+      "so_what": "Point prevention work at the crime types with the biggest increases, since they add the most new cases."
+    },
+    {
+      "statement": "Spikes are rare but real. The largest was THEFT OF IDENTITY in Mar 2022.",
+      "evidence": "THEFT OF IDENTITY had 1,820 incidents against a usual 1042. Flagged months: 7 area-months, 41 crime-type-months, 0 whole-city months.",
+      "so_what": "Review the flagged months first. Check whether a real event, a change in reporting or a data entry batch caused each jump."
+    },
+    {
+      "statement": "In Nov 2024, the biggest month-to-month moves were in Central and TRESPASSING.",
+      "evidence": "Central: -115 incidents versus the month before. TRESPASSING: -231 incidents.",
+      "so_what": "Treat one month as a prompt to look closer, not as proof of a trend. Check the next month before changing plans."
+    }
+  ],
+  "method_notes": [
+    {
+      "method": "SQL-style aggregation (group and count)",
+      "why": "The raw file has one row per incident. Counting rows by month, area and crime type turns it into small tables a dashboard can read quickly.",
+      "alternative": "A database could do the same counts. It adds setup work and is not needed for one file."
+    },
+    {
+      "method": "Geographic analysis",
+      "why": "Each area gets a map point (the median of its incident coordinates) and a 12-month change, so the client can see where counts move.",
+      "alternative": "Drawing area boundaries would be more exact, but the data has no boundary file and only point coordinates."
+    },
+    {
+      "method": "Anomaly detection with a trailing baseline",
+      "why": "A month is flagged when it is at least 3 standard deviations above the average of the prior 12 months, and also 20+ incidents and 20%+ above it. This is simple to explain and ignores tiny counts.",
+      "alternative": "Forecasting models such as seasonal models could handle seasons better. They are harder to explain and need more tuning for little gain here."
+    }
+  ],
+  "caveats": [
+    "These are reported incidents, not all crime. Changes can come from reporting habits as well as real changes in crime.",
+    "Counts are by the date the incident happened. Recent months may be incomplete if incidents are reported late.",
+    "The data has no population figures, so counts are not rates per resident. Larger areas will have more incidents.",
+    "The data only has area names, not finer neighborhood names, so 'neighborhood' here means the named area.",
+    "2,240 rows had a coordinate of 0. They are counted but have no place on the map.",
+    "0 repeated record numbers were removed. 4,697 rows from partly covered months were left out.",
+    "Some crime type descriptions are cut off in the source file, so a few names look shortened.",
+    "A spike flag needs 12 earlier months, so no flags exist before Jan 2021.",
+    "The data shows what changed, not why. Causes need local knowledge."
+  ]
+}
